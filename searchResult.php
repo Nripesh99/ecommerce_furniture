@@ -1,28 +1,17 @@
-<?php session_start(); ?>
-<!doctype html>
-<html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Skin Care Shop</title>
-  <style>
-    <?php include "Assets/style.css" ?>
-  </style>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
+
 
 <body>
   <?php
   include 'components/navbar.php';
   ?>
-  <center>
+  <!-- <center>
     <div class="crousel-box">
       <?php
       include 'components/crousel.php';
       ?>
     </div>
-  </center>
+  </center> -->
 
   <div class="container">
     <h2 class="trending-products">Search Results</h2>
@@ -33,12 +22,15 @@
       
       $sql = "select * from product_details where product_name like'%$searchTerm%'";
       $result = mysqli_query($conn, $sql);
-
+      
       while ($row = mysqli_fetch_assoc($result)) {
         $product_name = $row['product_name'];
         $price = $row['product_price'];
         $product_id = $row['product_id'];
         $image = $row['product_image'];
+     
+        echo "<h1> No product found</h1>";
+     
       ?>
      <a href="getProductDetails.php?product_id=<?php echo($product_id) ?>" style="text-decoration: none;" >
        <div class="card" id="product-card">
