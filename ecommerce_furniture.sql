@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2024 at 04:21 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Mar 05, 2024 at 02:57 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ecommerce_425`
+-- Database: `ecommerce_furniture`
 --
 
 -- --------------------------------------------------------
@@ -33,6 +33,26 @@ CREATE TABLE `cart_tbl` (
   `user_id` int(120) DEFAULT NULL,
   `qty` int(120) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `category_name` varchar(240) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `category_name`) VALUES
+(1, 'Car'),
+(2, 'Bed'),
+(3, 'Chair');
 
 -- --------------------------------------------------------
 
@@ -54,7 +74,8 @@ CREATE TABLE `customer_details` (
 --
 
 INSERT INTO `customer_details` (`customer_id`, `customer_name`, `address`, `contact_no`, `username`, `password`) VALUES
-(1, 'Alisha Manandhar', 'Kamalbinayak', '9861770872', 'alisha65', '$2y$10$vCnmuCQ.I8fW59gVF/So8eQcmvSNIC2jn47miouKfr4gfKTEwQOMe');
+(2, 'Nripesh', 'kathmandu', '98', 'Nripesh', '$2y$10$9EPIsrvaf5fezTo35iiyzeSb3ERMHbifHhy4F6ePFWPIBIUanFlom'),
+(3, 'nripesh', 'nripesh', '9012', 'nripesh', '$2y$10$dI1.V1ef8P6P.u16zCpk9O4yZQB8Ftyg8urmEoBsNfb5POep2Jxqi');
 
 -- --------------------------------------------------------
 
@@ -91,23 +112,22 @@ INSERT INTO `order_details` (`order_id`, `customer_id`, `product_id`, `qty`, `pa
 --
 
 CREATE TABLE `product_details` (
-  `product_id` int(120) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
-  `product_price` double NOT NULL,
-  `product_image` varchar(255) NOT NULL,
-  `product_qty` int(120) DEFAULT NULL,
-  `product_desc` varchar(255) DEFAULT NULL,
-  `category` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(233) DEFAULT NULL,
+  `product_price` int(11) DEFAULT NULL,
+  `product_image` varchar(254) DEFAULT NULL,
+  `product_qty` int(11) DEFAULT NULL,
+  `product_desc` varchar(233) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product_details`
 --
 
-INSERT INTO `product_details` (`product_id`, `product_name`, `product_price`, `product_image`, `product_qty`, `product_desc`, `category`) VALUES
-(1, 'CeraVe Lotion', 1300, 'ceravelotion.jpg', 5, 'A lightweight, oil-free moisturizer that helps hydrate the skin and restore its natural barrier', 'skinCare'),
-(2, 'Acmist Moisturizer', 631, 'Acmist.jpg', 6, 'a moisturizer used for oily and pimple-prone skin and sensitive skin.', 'skinCare'),
-(3, 'Mac Pallet', 1400, 'mac pallete.jpg', 8, 'offers a spectrum of shades, usually within the same color group, or at least in complementary shades', 'cosmetic');
+INSERT INTO `product_details` (`product_id`, `product_name`, `product_price`, `product_image`, `product_qty`, `product_desc`, `category_id`) VALUES
+(1, 'Bed', 100, 'bed.jpg', 20, 'this is a bed', 2),
+(2, 'chair', 120, 'chair.jpg', 20, 'this is a chair', 1);
 
 -- --------------------------------------------------------
 
@@ -140,6 +160,12 @@ ALTER TABLE `cart_tbl`
   ADD PRIMARY KEY (`cart_id`);
 
 --
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `customer_details`
 --
 ALTER TABLE `customer_details`
@@ -155,7 +181,8 @@ ALTER TABLE `order_details`
 -- Indexes for table `product_details`
 --
 ALTER TABLE `product_details`
-  ADD PRIMARY KEY (`product_id`);
+  ADD PRIMARY KEY (`product_id`),
+  ADD KEY `category_id` (`category_id`);
 
 --
 -- Indexes for table `user_details`
@@ -171,13 +198,19 @@ ALTER TABLE `user_details`
 -- AUTO_INCREMENT for table `cart_tbl`
 --
 ALTER TABLE `cart_tbl`
-  MODIFY `cart_id` int(120) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cart_id` int(120) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `customer_details`
 --
 ALTER TABLE `customer_details`
-  MODIFY `customer_id` int(120) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `customer_id` int(120) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_details`
@@ -189,13 +222,23 @@ ALTER TABLE `order_details`
 -- AUTO_INCREMENT for table `product_details`
 --
 ALTER TABLE `product_details`
-  MODIFY `product_id` int(120) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
   MODIFY `user_id` int(120) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `product_details`
+--
+ALTER TABLE `product_details`
+  ADD CONSTRAINT `product_details_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
