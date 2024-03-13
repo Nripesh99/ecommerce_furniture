@@ -1,20 +1,5 @@
-<?php
-include "../config/db.php";
-session_start();
-
-if (isset($_SESSION['toastr'])):
-  $toastr = $_SESSION['toastr'];
-  ?>
-  <script>
-    toastrFunction('<?php echo $_SESSION['toastr']['type']; ?>', '<?php echo $_SESSION['toastr']['message']; ?>');
-  </script>
-  <?php
-  unset($_SESSION['toastr']);
-endif;
-?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,20 +12,22 @@ endif;
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-  <!--Toaster Function -->
+ <!--Toastr link and function -->
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<!--Toaster Function -->
   <script>
     function toastrFunction(type = 'success', message = '', closeButton = true) {
-      console.log('function called');
+      console.log("function called");
       toastr.options = {
         "closeButton": false,
         "debug": false,
         "newestOnTop": false,
         "progressBar": false,
-        "positionClass": "toast-bottom-right",
+        "positionClass": "toast-top-right",
         "preventDuplicates": false,
         "onclick": null,
         "showDuration": "300",
@@ -72,14 +59,15 @@ endif;
 
     }
   </script>
+
+
   <!-- Bootstrap icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-
 <body>
   <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary py-3" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand ml-5" href="/ecommerce_furniture">
+      <a class="navbar-brand ml-5" href="index.php">
         House</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,9 +83,10 @@ endif;
             </form>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/Ecommerce">Home</a></li>
-            <li><a class="nav-link active" href="showallorder.php"> Orders</a>
-            <li><a class="nav-link active" href="showallproduct.php"> Product</a>
+            <a class="nav-link active" aria-current="page" href="/Ecommerce">Home</a>
+          </li>
+          <li><a class="nav-link active" href="showallorder.php"> Orders</a>
+          <li><a class="nav-link active" href="showallproduct.php"> Product</a>
           </li>
 
 
@@ -113,7 +102,7 @@ endif;
               <?php if (isset($_SESSION['username'])) { ?>
 
               <?php } ?>
-              <li><a class="dropdown-item" href="backend/logoutApi.php">Logout</a></li>
+              <li><a class="dropdown-item" href="../backend/logoutApi.php">Logout</a></li>
             </ul>
           </li>
         </ul>

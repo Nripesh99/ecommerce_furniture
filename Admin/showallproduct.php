@@ -1,9 +1,13 @@
 
 
-<?php include "../components/Adminnav.php"; ?>
+<?php
+session_start();
+if (isset($_SESSION['username']) && $_SESSION['username']==='admin') {
+include '../components/AdminNav.php';
+include "../config/db.php";
+ ?>
 <?php 
 
-if (isset($_SESSION['username'])) {
     $user_id = $_SESSION['user_id'];
     $query = "select * from product_details join categories on product_details.category_id = categories.id  order by product_id desc ";
 
@@ -12,9 +16,9 @@ if (isset($_SESSION['username'])) {
     ?>
     <div class="container mt-5">
         <h3>Product List</h3>
-        <!-- <div class="text-end">
-            <div class="btn btn-primary"></div>
-        </div> -->
+        <div class="text-end">
+            <a class="btn btn-primary" href="productAdd.php">Add Product</a>
+        </div>
         <table class="table table-striped" id="cart_tbl">
             <thead>
                 <tr>
@@ -77,7 +81,8 @@ if (isset($_SESSION['username'])) {
     <?php
 
 } else {
-    header('location:userLogin.php');
+    header('location:../backend/logoutApi.php');
+    die();
 } ?>
 
 

@@ -1,6 +1,9 @@
 <?php
+session_start();
+if (isset($_SESSION['username']) && $_SESSION['username']==='admin') {
+
 include '../components/AdminNav.php';
-@include_once "../config/db.php";
+include "../config/db.php";
 $sql = "SELECT count(product_id) as product FROM product_details ";
 $result = mysqli_query($conn, $sql);
 
@@ -55,3 +58,9 @@ if ($result2) {
         </div>
     </div>
 </div>
+<?php
+
+} else {
+    header('location:../backend/logoutApi.php');
+} ?>
+

@@ -1,15 +1,38 @@
 
 
-<?php include "../components/Adminnav.php"; ?>
 <?php 
-
-if (isset($_SESSION['username'])) {
+session_start();
+if (isset($_SESSION['username']) && $_SESSION['username']==='admin') {
+include '../components/AdminNav.php';
+include "../config/db.php";
+if (isset($_SESSION['toastr'])):
+    $toastr = $_SESSION['toastr'];?>
+<script>
+    toastrFunction('<?php echo $_SESSION['toastr']['type']; ?>', '<?php echo $_SESSION['toastr']['message']; ?>');
+</script>
+<?php
+  unset($_SESSION['toastr']);
+endif;
+?>
+<?php
     $user_id = $_SESSION['user_id'];
     $query = "select * from order_details join product_details on order_details.product_id = product_details.product_id  order by order_id desc ";
-
+    
     $query_result = mysqli_query($conn, $query);
     $count = 0;
     ?>
+       
+    <?php  ?>
+    <?php
+    if (isset($_SESSION['toastr'])):
+    $toastr = $_SESSION['toastr'];?>
+<script>
+    toastrFunction('<?php echo $_SESSION['toastr']['type']; ?>', '<?php echo $_SESSION['toastr']['message']; ?>');
+</script>
+<?php
+  unset($_SESSION['toastr']);
+endif;
+?>
     <div class="container mt-5">
         <h3>My Order List</h3>
         <table class="table table-striped" id="cart_tbl">
@@ -30,6 +53,7 @@ if (isset($_SESSION['username'])) {
        
                 <?php while ($row = mysqli_fetch_assoc($query_result)) {
                     $count = $count + 1;
+                    $order_id=$row['order_id'];
                     $product_name = $row['product_name'];
                     $price = $row['product_price'];
                     $product_id = $row['product_id'];
@@ -62,7 +86,9 @@ if (isset($_SESSION['username'])) {
                         <td>
                             <?php echo ($order_status) ?>
                         </td>
-                        <td><button class="btn btn-outline-danger">Cancel</button></td>
+                        <td><a class="btn btn-outline-danger" href="changestatus.php?order_id=<?=$order_id?>&status=delivered">Delivered</a>
+                        <a class="btn btn-outline-danger" href="changestatus.php?order_id=<?=$order_id?>&status=sent">Sent</a></td>
+
                     </tr>
                     <?php
                 } ?>
@@ -82,7 +108,7 @@ if (isset($_SESSION['username'])) {
     <?php
 
 } else {
-    header('location:userLogin.php');
+    header('location:../backend/logoutApi.php');
 } ?>
 
 

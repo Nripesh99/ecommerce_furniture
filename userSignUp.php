@@ -10,33 +10,42 @@
 </head>
 <body>
     <div class="container">
-        
-            <div class="card" id="login-card">
-                <form action="backend/userSignupApi.php" method="post" style="margin-left:1rem">
-                <h3 class="login-head">User Signup</h3>
-                    <label for="customer_name">Customer Name:</label><br>
-                    <input type="text" name="customer_name" id="username"><br><br>
-                    <label for="address">Address:</label><br>
-                    <input type="text" name="address" id="password">
-                    <br><br>
-                    <label for="contact">Contact No:</label><br>
-                    <input type="text" name="contact" id="password">
-                    <br><br>
-                    <label for="username">Username:</label><br>
-                    <input type="text" name="username" id="password">
-                    <br><br>
-                    <label for="password">Password:</label><br>
-                    <input type="password" name="password" id="password">
-                    <br><br>
-                   
-                    
-                    <input type="submit" value="Sign Up" class="btn btn-primary" id="login-btn">
-                </form>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">User Signup</h3>
+                        <form action="backend/userSignupApi.php" method="post">
+                            <div class="mb-3">
+                                <label for="customer_name" class="form-label">Customer Name:</label>
+                                <input type="text" class="form-control" id="customer_name" name="customer_name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address:</label>
+                                <input type="text" class="form-control" id="address" name="address">
+                            </div>
+                            <div class="mb-3">
+                                <label for="contact" class="form-label">Contact No:</label>
+                                <input type="text" class="form-control" id="contact" name="contact">
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username:</label>
+                                <input type="text" class="form-control" id="username" name="username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password:</label>
+                                <input type="password" class="form-control" id="password" name="password">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Sign Up</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-        
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
 </body>
 </html>

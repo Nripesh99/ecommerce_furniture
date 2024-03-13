@@ -18,8 +18,14 @@ while($row=mysqli_fetch_assoc($result)){
             session_start();
             $_SESSION['username']=$username;
             $_SESSION['user_id']=$user_id;
-            header('location:../index.php');
-            break;
+            if($_SESSION['username']==='admin'){
+
+                header('location:../Admin/index.php');
+                break;
+            }else{
+                header('location:../index.php');
+                break;
+            }
         }else{
             echo("Failed");
         }
