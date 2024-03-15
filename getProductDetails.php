@@ -78,9 +78,6 @@ while ($row = mysqli_fetch_assoc($result)) {
       }
 
     });
-    function setUrl(){
-      window.location.href='backend/addToCartApi.php?product_id=<?php echo ($product_id) ?>&qty='+counter;
-    }
   </script>
 </body>
 
