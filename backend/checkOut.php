@@ -74,6 +74,10 @@ if (isset($_SESSION['username'])) {
 
         <?php
     } else {
+        $_SESSION['toastr'] = array(
+            'type' => 'error', // or 'success' or 'info' or 'warning'
+            'message' => 'cannot processed',
+        );
         header('location:buyProductCash.php');
     }
 

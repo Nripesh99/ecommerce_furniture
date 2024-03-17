@@ -16,7 +16,7 @@ endif;
 ?>
 <?php
     $user_id = $_SESSION['user_id'];
-    $query = "select * from order_details join product_details on order_details.product_id = product_details.product_id  order by order_id desc ";
+    $query = "select * from order_details join product_details on order_details.product_id = product_details.product_id join customer_details  on customer_details.customer_id = order_details.customer_id   order by order_id desc ";
     
     $query_result = mysqli_query($conn, $query);
     $count = 0;
@@ -45,6 +45,7 @@ endif;
                     <th scope="col">Quantity</th>
                     <th scope="col">Total</th>
                     <th scope="col">Payment Status</th>
+                    <th scope="col">Customer  Name</th>
                     <th scope="col">Order Status</th>
                     <th scope="col">Change status</th>
                 </tr>
@@ -61,6 +62,7 @@ endif;
                     $image = $row['product_image'];
                     $total = $price * $quantity;
                     $payment_status = $row['payment_status'];
+                    $customer_name=$row['customer_name'];
                     $order_status = $row['order_status'];
                     ?>
                     <tr>
@@ -82,6 +84,9 @@ endif;
                         </td>
                         <td>
                             <?php echo ($payment_status) ?>
+                        </td>
+                        <td>
+                            <?php echo ($customer_name) ?>
                         </td>
                         <td>
                             <?php echo ($order_status) ?>

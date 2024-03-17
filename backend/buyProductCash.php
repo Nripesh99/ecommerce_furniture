@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (isset($_SESSION['username'])) {
     $user_id = $_SESSION['user_id'];
     include "../config/db.php";
@@ -25,7 +26,13 @@ if (isset($_SESSION['username'])) {
         $result2 = mysqli_query($conn,$sql);
 
         if($result){
+            $_SESSION['toastr'] = array(
+                'type' => 'success', // or 'success' or 'info' or 'warning'
+                'message' => 'Product ordered succesfully',
+            );
             header('location:../showOrder.php');
         }
     }
+}else{
+    echo 'error';
 }

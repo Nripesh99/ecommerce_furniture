@@ -27,8 +27,20 @@ while($row=mysqli_fetch_assoc($result)){
                 break;
             }
         }else{
-            echo("Failed");
+            session_start();
+            $_SESSION['toastr'] = array(
+                'type' => 'error', // or 'success' or 'info' or 'warning'
+                'message' => 'Login Failed',
+            );
+            header('location:../userLogin.php');
         }
+    }else{
+        session_start();
+        $_SESSION['toastr'] = array(
+            'type' => 'success', // or 'success' or 'info' or 'warning'
+            'message' => 'Welcome',
+        );
+        header('location:../userLogin.php');
     }
 }
 

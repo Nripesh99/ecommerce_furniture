@@ -2,6 +2,17 @@
 $cart_total = 0;
 ?>
 <?php
+
+if (isset($_SESSION['toastr'])):
+    $toastr = $_SESSION['toastr'];?>
+<script>
+    toastrFunction('<?php echo $_SESSION['toastr']['type']; ?>', '<?php echo $_SESSION['toastr']['message']; ?>');
+</script>
+<?php
+  unset($_SESSION['toastr']);
+endif;
+?>
+<?php
 if (isset($_SESSION['username'])) {
     $user_id = $_SESSION['user_id'];
     include "config/db.php";

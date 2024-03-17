@@ -23,8 +23,69 @@
             width: 100%;
         }
     </style>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+<!--Toastr link and function -->
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<!--Toaster Function -->
+ <script>
+   function toastrFunction(type = 'success', message = '', closeButton = true) {
+     console.log("function called");
+     toastr.options = {
+       "closeButton": false,
+       "debug": false,
+       "newestOnTop": false,
+       "progressBar": false,
+       "positionClass": "toast-top-right",
+       "preventDuplicates": false,
+       "onclick": null,
+       "showDuration": "300",
+       "hideDuration": "1000",
+       "timeOut": "5000",
+       "extendedTimeOut": "1000",
+       "showEasing": "swing",
+       "hideEasing": "linear",
+       "showMethod": "fadeIn",
+       "hideMethod": "fadeOut"
+     }
+     switch (type) {
+       case 'success':
+         toastr.success(message);
+         break;
+       case 'error':
+         toastr.error(message);
+         break;
+       case 'info':
+         toastr.info(message);
+         break;
+       case 'warning':
+         toastr.warning(message);
+         break;
+       default:
+         toastr.error("Error aayo");
+         break;
+     }
+
+   }
+ </script>
+
 </head>
 <body>
+    <?php
+    session_start();
+    if (isset($_SESSION['toastr'])):
+        $toastr = $_SESSION['toastr'];?>
+    <script>
+        toastrFunction('<?php echo $_SESSION['toastr']['type']; ?>', '<?php echo $_SESSION['toastr']['message']; ?>');
+    </script>
+    <?php
+      unset($_SESSION['toastr']);
+    endif;
+    ?>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-4">

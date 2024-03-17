@@ -1,5 +1,5 @@
+<?php include "components/navbar.php" ?>
 <?php
-session_start();
 if (!isset($_SESSION['user_id'])) {
     header('location:userLogin.php');
 } else {
@@ -38,7 +38,7 @@ if (!isset($_SESSION['user_id'])) {
             <body>
 
                 </div>
-                <?php include "components/navbar.php" ?>
+                
                 <div class="main-container">
                     <div class="container">
                         <div class="card" id="login-card">

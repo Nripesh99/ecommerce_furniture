@@ -1,8 +1,18 @@
 
 
 <?php include "components/navbar.php"; ?>
-<?php 
+<?php
 
+if (isset($_SESSION['toastr'])):
+    $toastr = $_SESSION['toastr'];?>
+<script>
+    toastrFunction('<?php echo $_SESSION['toastr']['type']; ?>', '<?php echo $_SESSION['toastr']['message']; ?>');
+</script>
+<?php
+  unset($_SESSION['toastr']);
+endif;
+?>
+<?php 
 if (isset($_SESSION['username'])) {
     $user_id = $_SESSION['user_id'];
     $query = "select * from order_details join product_details on order_details.product_id = product_details.product_id  where customer_id='$user_id' order by order_id desc ";

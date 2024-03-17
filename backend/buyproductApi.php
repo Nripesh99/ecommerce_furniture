@@ -38,7 +38,6 @@ if (!isset($_SESSION['user_id'])) {
     <body>
 
         </div>
-        <?php include "../components/navbar.php" ?>
         <div class="main-container">
             <div class="container">
                 <div class="card" id="login-card">
@@ -73,7 +72,7 @@ if (!isset($_SESSION['user_id'])) {
     </html>
 <?php
     }else{
-        echo("payment");
+        header("location:buyProductCash.php");
     }
 }
 

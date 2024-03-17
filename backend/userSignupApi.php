@@ -13,6 +13,11 @@ $sql = "INSERT INTO customer_details(customer_name,address,contact_no,username,p
 $result = mysqli_query($conn,$sql);
 
 if($result){
+    session_start();
+    $_SESSION['toastr'] = array(
+        'type' => 'success', // or 'success' or 'info' or 'warning'
+        'message' => 'user added succesfully',
+    );
     header('location:../userLogin.php');
 }else{
     echo("Login Failed");
